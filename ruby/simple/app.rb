@@ -2,6 +2,8 @@
 # frozen_string_literal: true
 
 require 'turbine'
+require 'pry'
+
 
 def app
   app = TurbineRB::App.new('myapp')
@@ -40,3 +42,5 @@ class SomethingElse
     records
   end
 end
+
+binding.pry
