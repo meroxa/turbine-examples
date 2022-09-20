@@ -2,11 +2,9 @@
 # frozen_string_literal: true
 
 require 'turbine'
-require 'pry'
-
 
 def app
-  app = TurbineRB::App.new('myapp')
+  app = Turbine::App.new('myapp')
 
   database = app.resource(name: 'demopg')
 
@@ -42,5 +40,3 @@ class SomethingElse
     records
   end
 end
-
-binding.pry
