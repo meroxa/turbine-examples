@@ -1,2 +1,4 @@
 #! /bin/sh
-ruby -I ../proto -I .. ../function_runner.rb $1
+app=$1
+function=$2
+bundle exec ruby  -e "load('$app'); Turbine::Support::FunctionServer.run '$function'"
