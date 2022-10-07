@@ -1,0 +1,8 @@
+{
+  "name": "search-sync",
+  "language": "javascript",
+  "environment": "common",
+  "resources": {
+    "postgresql": "fixtures/demo-cdc.json"
+  }
+}
