@@ -32,8 +32,13 @@ end
 # Turbine.register(MyApp.new, name: app_name) # optional name arg otherwise name is pulled from app.json
 
 class Passthrough < Turbine::Process # might be useful to signal that this is a special Turbine call
-  def process(records:)
+  def call(records:)
     puts "got records: #{records}"
     # records.map { |r| r.value = 'hi there' }
+    records
   end
 end
+
+# Need to wrap this and call the named function
+f = Passthrough.new
+f.serve
