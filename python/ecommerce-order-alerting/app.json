@@ -1,0 +1,8 @@
+{
+    "name": "ecommerce-order-alerting",
+    "language": "python",
+    "resources": {
+        "source_db": "fixtures/demo-no-cdc.json",
+        "warehouse": "warehouse"
+    }
+}

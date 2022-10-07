@@ -1,0 +1,8 @@
+# meroxa library
+turbine-py>=1.1.0
+
+# Slack API
+slack_sdk
+
+# Testing library for unit testing
+pytest
