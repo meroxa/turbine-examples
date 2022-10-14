@@ -1,0 +1,68 @@
+{
+  "": [
+    {
+      "avatar": null,
+      "communication_disabled_until": null,
+      "deaf": false,
+      "flags": 0,
+      "is_pending": false,
+      "joined_at": "2022-04-26T19:38:06.686000+00:00",
+      "mute": false,
+      "nick": null,
+      "pending": false,
+      "premium_since": null,
+      "roles": [],
+      "user": {
+        "avatar": "e0f932814444f5c7dd1a38f1c473bbc2",
+        "avatar_decoration": null,
+        "discriminator": "8796",
+        "id": "110200111332975616",
+        "public_flags": 0,
+        "username": "ali"
+      }
+    },
+    {
+      "avatar": null,
+      "communication_disabled_until": null,
+      "deaf": false,
+      "flags": 0,
+      "is_pending": false,
+      "joined_at": "2021-06-30T16:30:52.923000+00:00",
+      "mute": false,
+      "nick": "Dylan",
+      "pending": false,
+      "premium_since": null,
+      "roles": [
+        "987115737493680130"
+      ],
+      "user": {
+        "avatar": "18bff0460e6cf22ff64e7a42f41584ad",
+        "avatar_decoration": null,
+        "discriminator": "8989",
+        "id": "141634151116780928",
+        "public_flags": 0,
+        "username": "steve"
+      }
+    },
+    {
+      "avatar": null,
+      "communication_disabled_until": null,
+      "deaf": false,
+      "flags": 0,
+      "is_pending": false,
+      "joined_at": "2022-08-23T22:49:52.747000+00:00",
+      "mute": false,
+      "nick": null,
+      "pending": false,
+      "premium_since": null,
+      "roles": [],
+      "user": {
+        "avatar": "ccb7efd991e3330400675d8ab8c0360f",
+        "avatar_decoration": null,
+        "discriminator": "3346",
+        "id": "151054333334821376",
+        "public_flags": 0,
+        "username": "Alice"
+      }
+    }
+  ]
