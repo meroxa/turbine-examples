@@ -39,27 +39,10 @@ func (a App) Run(v turbine.Turbine) error {
 
 	res := v.Process(rr, Logger{})
 
-	// Identify a downstream data store for your data app
-	// with the `Resources` function
-	// Replace `destination_name` with the resource name the
-	// data store was configured with on Meroxa.
-
-	dest, err := v.Resources("s3")
+	dest, err := v.Resources("webhook")
 	if err != nil {
 		return err
 	}
-
-	// Specify where to write records downstream
-	// using the `Write` function
-	// Replace `collection_archive` with a table, collection,
-	// or bucket name in your data store.
-	// If a configuration is needed, you can also use i.e.
-	//
-	// dest.WriteWithConfig(
-	//  res,
-	//  "my-archive",
-	//  turbine.ResourceConfigs{turbine.ResourceConfig{Field: "buffer.flush.time", Value: "10"}}
-	// )
 
 	err = dest.Write(res, "discord_users")
 	if err != nil {
