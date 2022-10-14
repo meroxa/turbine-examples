@@ -29,7 +29,7 @@ func (a App) Run(v turbine.Turbine) error {
 		{"http.request.headers", authHeader()},
 		{"http.request.url", guildMembersURL()}, // limit, after (highest ID)
 		{"http.offset.initial", "id=0"},
-		{"http.request.params", "after=${offset.id}"},
+		{"http.request.params", "after=${offset.id}, limit=10"},
 		{"http.response.record.offset.pointer", "key=/user/id, id=/user/id"},
 		{"http.response.list.pointer", "/"},
 	})
