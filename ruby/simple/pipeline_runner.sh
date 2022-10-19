@@ -9,8 +9,5 @@ fi
 
 app=$2
 
-# turbine-core --mode=$mode &
-# ruby -I ../proto -I .. ../pipeline_runner.rb
-
 turbine-core --mode=$mode &
-bundle exec ruby -e "require_relative('./app'); $app"
+bundle exec ruby -e "require_relative('./app'); Turbine.run;"
