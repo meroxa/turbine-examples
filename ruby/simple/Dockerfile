@@ -1,5 +1,4 @@
-FROM turbine-rb-base:latest
-
+FROM turbine-rb-base:0.0.1
 WORKDIR /app
-
 COPY . .
+USER nobody
