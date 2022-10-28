@@ -1,2 +1,3 @@
 #! /bin/sh
-ruby -I ../proto -I .. ../function_runner.rb $1
+function=$1
+bundle exec ruby -e "require_relative('./app'); $function.new.serve"

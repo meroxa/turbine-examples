@@ -7,5 +7,7 @@ if [ "$1" = "platform" ]; then
     mode=platform
 fi
 
+app=$2
+
 turbine-core --mode=$mode &
-ruby -I ../proto -I .. ../pipeline_runner.rb
+bundle exec ruby -e "require_relative('./app'); Turbine.run;"

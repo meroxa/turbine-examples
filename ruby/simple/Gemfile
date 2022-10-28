@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-# gem 'turbine', source: 'https://gem.fury.io/meroxa/'
+gem 'turbine', source: 'https://gem.fury.io/meroxa/'
 # gem 'turbine', path: '../../../turbine-core-grpc/lib/ruby/turbine'
-gem 'turbine', github: "meroxa/turbine", branch: "main"
-gem 'pry'
+# gem 'turbine', github: "meroxa/turbine", branch: "ah/ruby"
