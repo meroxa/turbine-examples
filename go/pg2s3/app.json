@@ -1,0 +1,8 @@
+{
+  "name": "pgtos3",
+  "language": "golang",
+  "environment": "common",
+  "resources": {
+    "pgdb": "fixtures/demo.json"
+  }
+}

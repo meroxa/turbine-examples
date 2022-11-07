@@ -1,0 +1,58 @@
+{
+  "turbine-demo": [
+    {
+      "key": "1",
+      "value": {
+        "schema": {
+          "type": "struct",
+          "fields": [
+            { "field": "id", "optional": false, "type": "int32" },
+            { "field": "email", "optional": false, "type": "varchar" }
+          ],
+          "optional": false,
+          "name": "collection_name"
+        },
+        "payload": {
+          "id": 9582724,
+          "email": "usera@example.com"
+        }
+      }
+    },
+    {
+      "key": "2",
+      "value": {
+        "schema": {
+          "type": "struct",
+          "fields": [
+            { "field": "id", "optional": false, "type": "int32" },
+            { "field": "email", "optional": false, "type": "varchar" }
+          ],
+          "optional": false,
+          "name": "collection_name"
+        },
+        "payload": {
+          "id": 9582725,
+          "email": "userb@example.com"
+        }
+      }
+    },
+    {
+      "key": "3",
+      "value": {
+        "schema": {
+          "type": "struct",
+          "fields": [
+            { "field": "id", "optional": false, "type": "int32" },
+            { "field": "email", "optional": false, "type": "varchar" }
+          ],
+          "optional": false,
+          "name": "collection_name"
+        },
+        "payload": {
+          "id": 9582726,
+          "email": "userc@example.com"
+        }
+      }
+    }
+  ]
+}

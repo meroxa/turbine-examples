@@ -1,0 +1,8 @@
+{
+  "name": "mongo-kafka-demo",
+  "language": "golang",
+  "environment": "common",
+  "resources": {
+    "mdb": "fixtures/mdb.json"
+  }
+}

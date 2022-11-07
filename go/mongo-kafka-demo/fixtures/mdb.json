@@ -1,0 +1,140 @@
+{
+  "events": [{
+    "key": "100",
+    "value": {
+      "payload": {
+        "after": "{\"_id\": {\"$oid\": \"625e228055150fd4ed98e588\"},\"user_id\": \"100\",\"activity\": \"logged in\",\"email\": \"alice@example.com\", \"vip\":true}",
+        "filter": null,
+        "op": "r",
+        "patch": null,
+        "source": {
+          "collection": "events",
+          "connector": "mongodb",
+          "db": "myFirstDatabase",
+          "h": null,
+          "name": "resource-15000-522220",
+          "ord": 22,
+          "rs": "atlas-ahvu78-shard-0",
+          "snapshot": "last",
+          "stxnid": null,
+          "tord": null,
+          "ts_ms": 1650386890000,
+          "version": "1.2.5.Final"
+        },
+        "transaction": null,
+        "ts_ms": 1650399987789
+      },
+      "schema": {
+        "fields": [{
+          "field": "after",
+          "name": "io.debezium.data.Json",
+          "optional": true,
+          "type": "string",
+          "version": 1
+        }, {
+          "field": "patch",
+          "name": "io.debezium.data.Json",
+          "optional": true,
+          "type": "string",
+          "version": 1
+        }, {
+          "field": "filter",
+          "name": "io.debezium.data.Json",
+          "optional": true,
+          "type": "string",
+          "version": 1
+        }, {
+          "field": "source",
+          "fields": [{
+            "field": "version",
+            "optional": false,
+            "type": "string"
+          }, {
+            "field": "connector",
+            "optional": false,
+            "type": "string"
+          }, {
+            "field": "name",
+            "optional": false,
+            "type": "string"
+          }, {
+            "field": "ts_ms",
+            "optional": false,
+            "type": "int64"
+          }, {
+            "default": "false",
+            "field": "snapshot",
+            "name": "io.debezium.data.Enum",
+            "optional": true,
+            "parameters": {
+              "allowed": "true,last,false"
+            },
+            "type": "string",
+            "version": 1
+          }, {
+            "field": "db",
+            "optional": false,
+            "type": "string"
+          }, {
+            "field": "rs",
+            "optional": false,
+            "type": "string"
+          }, {
+            "field": "collection",
+            "optional": false,
+            "type": "string"
+          }, {
+            "field": "ord",
+            "optional": false,
+            "type": "int32"
+          }, {
+            "field": "h",
+            "optional": true,
+            "type": "int64"
+          }, {
+            "field": "tord",
+            "optional": true,
+            "type": "int64"
+          }, {
+            "field": "stxnid",
+            "optional": true,
+            "type": "string"
+          }],
+          "name": "io.debezium.connector.mongo.Source",
+          "optional": false,
+          "type": "struct"
+        }, {
+          "field": "op",
+          "optional": true,
+          "type": "string"
+        }, {
+          "field": "ts_ms",
+          "optional": true,
+          "type": "int64"
+        }, {
+          "field": "transaction",
+          "fields": [{
+            "field": "id",
+            "optional": false,
+            "type": "string"
+          }, {
+            "field": "total_order",
+            "optional": false,
+            "type": "int64"
+          }, {
+            "field": "data_collection_order",
+            "optional": false,
+            "type": "int64"
+          }],
+          "optional": true,
+          "type": "struct"
+        }],
+        "name": "resource_15000_522220.myFirstDatabase.events.Envelope",
+        "optional": false,
+        "type": "struct"
+      }
+
+    },
+    "timestamp": "1650336128"
+  }]
+}
