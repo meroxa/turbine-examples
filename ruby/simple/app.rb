@@ -1,3 +1,5 @@
+require 'rubygems'
+require 'bundler/setup'
 require 'turbine_rb'
 
 class MyApp
