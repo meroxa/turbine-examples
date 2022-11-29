@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rubygems'
 require 'bundler/setup'
 require 'turbine_rb'
@@ -23,10 +24,9 @@ class MyApp
   end
 end
 
-class Passthrough < TurbineRb::Process 
+class Passthrough < TurbineRb::Process
   def call(records:)
     puts "got records: #{records}"
-    # records.map { |r| r.value = 'hi there' }
     records
   end
 end
