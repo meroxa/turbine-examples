@@ -1,6 +1,6 @@
 {
-    "name": "simple",
-    "language": "ruby",
+    "name": "ruby-example",
+    "language": "ruby (beta)",
     "environment": "common",
     "resources": {
         "demopg": "fixtures/demo.json"
