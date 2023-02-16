@@ -1,10 +1,9 @@
 package main
 
 import (
-
-	// Dependencies of Turbine
 	"log"
 
+	// Dependencies of Turbine
 	"github.com/meroxa/turbine-go"
 	"github.com/meroxa/turbine-go/runner"
 )
