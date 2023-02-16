@@ -2,12 +2,7 @@ module github.com/meroxa/kafka-pg-demo
 
 go 1.19
 
-require (
-	github.com/ahamidi/kcschema v0.0.0-00010101000000-000000000000
-	github.com/meroxa/turbine-go v0.0.0-20220906184519-091122051611
-)
-
-replace github.com/ahamidi/kcschema => ../../ahamidi/kcschema
+require github.com/meroxa/turbine-go v0.0.0-20220906184519-091122051611
 
 require (
 	github.com/caarlos0/env/v6 v6.9.3 // indirect
