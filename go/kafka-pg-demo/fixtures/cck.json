@@ -108,7 +108,7 @@
                 "type": "struct"
               }
             ],
-            "name": "resource_1_474843.Envelope",
+            "name": "inbound.Envelope",
             "type": "struct"
           }
       },
