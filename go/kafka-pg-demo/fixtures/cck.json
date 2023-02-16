@@ -1,10 +1,116 @@
 {
   "inbound": [
     {
-      "key": "1",
+      "key": "{\"payload\": \"eyJpZCI6MX0=\", \"schema\": { \"optional\": true, \"type\": \"bytes\" } }",
       "value": {
-        "id": 1,
-        "email": "alice@example.com"
+          "payload": {
+            "after": {
+              "id": 1,
+              "email": "alice@example.com"
+            },
+            "before": null,
+            "op": "c",
+            "source": {
+              "conduit.source.connector.id": "fe29b418-3f4a-4218-983b-ae6d035b9ed8",
+              "kafka.topic": "inbound",
+              "opencdc.createdAt": "1675787182138000000",
+              "opencdc.readAt": "1675787182877082168",
+              "opencdc.version": "v1"
+            },
+            "transaction": null,
+            "ts_ms": 1675787182877
+          },
+          "schema": {
+            "fields": [
+              {
+                "field": "before",
+                "fields": [
+                  {
+                    "field": "email",
+                    "type": "string"
+                  },
+                  {
+                    "field": "id",
+                    "type": "double"
+                  }
+                ],
+                "optional": true,
+                "type": "struct"
+              },
+              {
+                "field": "after",
+                "fields": [
+                  {
+                    "field": "email",
+                    "type": "string"
+                  },
+                  {
+                    "field": "id",
+                    "type": "double"
+                  }
+                ],
+                "optional": true,
+                "type": "struct"
+              },
+              {
+                "field": "source",
+                "fields": [
+                  {
+                    "field": "kafka.topic",
+                    "type": "string"
+                  },
+                  {
+                    "field": "opencdc.createdAt",
+                    "type": "string"
+                  },
+                  {
+                    "field": "opencdc.readAt",
+                    "type": "string"
+                  },
+                  {
+                    "field": "conduit.source.connector.id",
+                    "type": "string"
+                  },
+                  {
+                    "field": "opencdc.version",
+                    "type": "string"
+                  }
+                ],
+                "optional": true,
+                "type": "struct"
+              },
+              {
+                "field": "op",
+                "type": "string"
+              },
+              {
+                "field": "ts_ms",
+                "optional": true,
+                "type": "int64"
+              },
+              {
+                "field": "transaction",
+                "fields": [
+                  {
+                    "field": "id",
+                    "type": "string"
+                  },
+                  {
+                    "field": "total_order",
+                    "type": "int64"
+                  },
+                  {
+                    "field": "data_collection_order",
+                    "type": "int64"
+                  }
+                ],
+                "optional": true,
+                "type": "struct"
+              }
+            ],
+            "name": "inbound.Envelope",
+            "type": "struct"
+          }
       },
       "timestamp": "1662593648"
     }

@@ -1,13 +1,11 @@
 package main
 
 import (
+	"log"
 
 	// Dependencies of Turbine
 	"github.com/meroxa/turbine-go"
 	"github.com/meroxa/turbine-go/runner"
-	"log"
-
-	"github.com/ahamidi/kcschema"
 )
 
 func main() {
@@ -50,22 +48,13 @@ func (a App) Run(v turbine.Turbine) error {
 type Format struct{}
 
 func (f Format) Process(stream []turbine.Record) []turbine.Record {
-	for i, record := range stream {
-		log.Printf("Original turbine Record: %+v", record)
-		sp, err := kcschema.Parse(kcschema.Payload(record.Payload))
+	for _, record := range stream {
+		payload, err := record.Payload.Map()
 		if err != nil {
-			log.Printf("error casting Payload to Map: %s", err.Error())
+			log.Print("unexpected payload", err)
 			break
 		}
-		log.Printf("Parsed payload: %+v", sp)
-
-		j, err := sp.AsKCSchemaJSON("inbound")
-		if err != nil {
-			log.Printf("error casting Payload to Map: %s", err.Error())
-			break
-		}
-		log.Printf("converted record with schema: %+v", string(j))
-		stream[i].Payload = j
+		log.Printf("record payload: %+v", payload)
 	}
 	return stream
 }
