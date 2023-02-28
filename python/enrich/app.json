@@ -1,0 +1,7 @@
+{
+  "name": "enrich",
+  "language": "python",
+  "resources": {
+    "source_db": "fixtures/pg-no-cdc.json"
+  }
+}
