@@ -1,5 +1,5 @@
 {
-    "name": "simple",
+    "name": "ruby-example",
     "language": "ruby",
     "environment": "common",
     "resources": {

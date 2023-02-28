@@ -1,0 +1,7 @@
+{
+    "name": "notion-s3-python",
+    "language": "python",
+    "resources": {
+        "source_name": "fixtures/demo-cdc.json"
+    }
+}

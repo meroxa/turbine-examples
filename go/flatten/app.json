@@ -1,0 +1,9 @@
+{
+  "name": "flatten",
+  "language": "golang",
+  "environment": "common",
+  "resources": {
+    "mongo": "fixtures/nested.json"
+  },
+  "vendor": "true"
+}
