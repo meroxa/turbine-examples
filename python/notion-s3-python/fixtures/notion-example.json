@@ -1,0 +1,195 @@
+{
+  "": [
+    {
+      "key": {
+        "payload": "MzgxMmE5MmUtNzQyMy00MGUwLTlmNzUtZDdjNjY2OTA5MWQ3",
+        "schema": {
+          "optional": true,
+          "type": "bytes"
+        }
+      },
+      "Partition": 0,
+      "Offset": 2,
+      "Timestamp": "2023-02-07 01:52:07.94 +0000 UTC",
+      "value": {
+        "payload": {
+          "after": {
+            "metadata": {
+              "notion.archived": "false",
+              "notion.createdBy": "{\"object\":\"user\",\"id\":\"ee6bdc50-6db2-4805-87d0-3ca2501f7773\"}",
+              "notion.createdTime": "2022-12-23T20:32:00Z",
+              "notion.lastEditedBy": "{\"object\":\"user\",\"id\":\"ee6bdc50-6db2-4805-87d0-3ca2501f7773\"}",
+              "notion.lastEditedTime": "2022-12-23T23:55:00Z",
+              "notion.parent": "{\"type\":\"workspace\",\"workspace\":true}",
+              "notion.title": "Blog Post",
+              "notion.url": "https://www.notion.so/Blog-Post-3812a92e742340e09f75d7c6669091d7"
+            },
+            "plaintext": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. A iaculis at erat pellentesque adipiscing commodo. Pharetra magna ac placerat vestibulum lectus mauris ultrices. Gravida dictum fusce ut placerat orci nulla pellentesque dignissim. Aliquet enim tortor at auctor urna nunc id cursus metus. Malesuada pellentesque elit eget gravida cum sociis natoque penatibus."
+          },
+          "before": null,
+          "op": "c",
+          "source": {
+            "conduit.source.connector.id": "a032099c-031e-44c6-98bb-9ff46f88744a",
+            "opencdc.readAt": "1675734727936759010",
+            "opencdc.version": "v1"
+          },
+          "transaction": null,
+          "ts_ms": 1675734727936
+        },
+        "schema": {
+          "fields": [
+            {
+              "field": "before",
+              "fields": [
+                {
+                  "field": "plaintext",
+                  "type": "string"
+                },
+                {
+                  "field": "metadata",
+                  "fields": [
+                    {
+                      "field": "notion.createdTime",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.lastEditedBy",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.lastEditedTime",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.parent",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.title",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.url",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.archived",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.createdBy",
+                      "type": "string"
+                    }
+                  ],
+                  "optional": true,
+                  "type": "struct"
+                }
+              ],
+              "optional": true,
+              "type": "struct"
+            },
+            {
+              "field": "after",
+              "fields": [
+                {
+                  "field": "plaintext",
+                  "type": "string"
+                },
+                {
+                  "field": "metadata",
+                  "fields": [
+                    {
+                      "field": "notion.createdBy",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.createdTime",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.lastEditedBy",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.lastEditedTime",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.parent",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.title",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.url",
+                      "type": "string"
+                    },
+                    {
+                      "field": "notion.archived",
+                      "type": "string"
+                    }
+                  ],
+                  "optional": true,
+                  "type": "struct"
+                }
+              ],
+              "optional": true,
+              "type": "struct"
+            },
+            {
+              "field": "source",
+              "fields": [
+                {
+                  "field": "conduit.source.connector.id",
+                  "type": "string"
+                },
+                {
+                  "field": "opencdc.version",
+                  "type": "string"
+                },
+                {
+                  "field": "opencdc.readAt",
+                  "type": "string"
+                }
+              ],
+              "optional": true,
+              "type": "struct"
+            },
+            {
+              "field": "op",
+              "type": "string"
+            },
+            {
+              "field": "ts_ms",
+              "optional": true,
+              "type": "int64"
+            },
+            {
+              "field": "transaction",
+              "fields": [
+                {
+                  "field": "id",
+                  "type": "string"
+                },
+                {
+                  "field": "total_order",
+                  "type": "int64"
+                },
+                {
+                  "field": "data_collection_order",
+                  "type": "int64"
+                }
+              ],
+              "optional": true,
+              "type": "struct"
+            }
+          ],
+          "name": "resource_2_482576.Envelope",
+          "type": "struct"
+        }
+      }
+    }
+  ]
+}
