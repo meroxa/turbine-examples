@@ -75,4 +75,5 @@ jobs:
         working-directory: go/flatten
         run: |
           go mod vendor
+          ls -lah
           meroxa apps run --path "$GITHUB_WORKSPACE/go/flatten"
