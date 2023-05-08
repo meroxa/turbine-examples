@@ -27,6 +27,10 @@ jobs:
         with:
           go-version: ^1.19
       - uses: actions/checkout@v3
+      - name: Flatten vendor
+        working-directory: flatten
+        run: |
+          go mod vendor
       - name: golangci-lint for flatten
         uses: golangci/golangci-lint-action@v3
         with:
@@ -71,5 +75,5 @@ jobs:
         working-directory: go/flatten
         run: |
           go mod vendor
-          echo $PWD
+          env
           meroxa apps run
