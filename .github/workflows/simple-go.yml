@@ -5,7 +5,7 @@ on:
 #      - 'simple/**'
 jobs:
   build:
-    name: Build
+    name: Simple (go) Build
     runs-on: ubuntu-latest
     steps:
     - name: Set up Go
@@ -15,10 +15,10 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v3
     - name: Build simple
-      working-directory: simple
+      working-directory: go/simple
       run: go build -mod=vendor ./...
   golangci:
-    name: golangci-lint
+    name: Simple (go) Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-go@v3
@@ -29,17 +29,17 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           args: --timeout 4m0s
-          working-directory: simple
+          working-directory: go/simple
   vet:
-    name: Vet
+    name: Simple (go) Vet
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Vet for simple
-        working-directory: simple
+        working-directory: go/simple
         run: go vet ./...
   test:
-    name: Test
+    name: Simple (go) Test
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
@@ -48,11 +48,11 @@ jobs:
         with:
           go-version: ^1.19
       - name: Run tests for simple
-        working-directory: simple
+        working-directory: go/simple
         run: |
          go test -v ./...
   run:
-    name: Run
+    name: Simple (go) Run
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
@@ -63,7 +63,7 @@ jobs:
         with:
           go-version: ^1.19
       - name: Run simple with CLI
-        working-directory: simple
+        working-directory: go/simple
         run: |
           go mod vendor
           meroxa apps run

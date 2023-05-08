@@ -5,7 +5,7 @@ on:
 #      - 'enrich/**'
 jobs:
   build:
-    name: Build
+    name: Enrich (Go) Build
     runs-on: ubuntu-latest
     steps:
     - name: Set up Go
@@ -15,10 +15,10 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v3
     - name: Build Enrich
-      working-directory: enrich
+      working-directory: go/enrich
       run: go build -mod=vendor ./...
   golangci:
-    name: golangci-lint
+    name: Enrich (go) Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-go@v3
@@ -29,17 +29,17 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           args: --timeout 4m0s
-          working-directory: enrich
+          working-directory: go/enrich
   vet:
-    name: Vet
+    name: Enrich (go) Vet
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Vet for enrich
-        working-directory: enrich
+        working-directory: go/enrich
         run: go vet ./...
   test:
-    name: Test
+    name: Enrich (go) Test
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
@@ -48,6 +48,6 @@ jobs:
         with:
           go-version: ^1.19
       - name: Run tests for enrich
-        working-directory: enrich
+        working-directory: go/enrich
         run: |
          go test -v ./...

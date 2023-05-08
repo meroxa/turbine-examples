@@ -5,7 +5,7 @@ on:
 #      - 'flatten/**'
 jobs:
   build:
-    name: Build
+    name: Flatten Build
     runs-on: ubuntu-latest
     steps:
     - name: Set up Go
@@ -15,10 +15,10 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v3
     - name: Build Flatten
-      working-directory: flatten
+      working-directory: go/flatten
       run: go build -mod=vendor ./...
   golangci:
-    name: golangci-lint
+    name: Flatten Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-go@v3
@@ -29,17 +29,17 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           args: --timeout 4m0s
-          working-directory: flatten
+          working-directory: go/flatten
   vet:
-    name: Vet
+    name: Flatten Vet
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Vet for flatten
-        working-directory: flatten
+        working-directory: go/flatten
         run: go vet ./...
   test:
-    name: Test
+    name: Flatten Test
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
@@ -48,11 +48,11 @@ jobs:
         with:
           go-version: ^1.19
       - name: Run tests for flatten
-        working-directory: flatten
+        working-directory: go/flatten
         run: |
          go test -v ./...
   run:
-    name: Run
+    name: Flatten Run
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
@@ -63,7 +63,7 @@ jobs:
         with:
           go-version: ^1.19
       - name: Run flatten with CLI
-        working-directory: flatten
+        working-directory: go/flatten
         run: |
           go mod vendor
           meroxa apps run

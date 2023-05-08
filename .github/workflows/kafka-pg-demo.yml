@@ -5,7 +5,7 @@ on:
 #      - 'kafka-pg-demop/**'
 jobs:
   build:
-    name: Build
+    name: Kafka PG Demo Build
     runs-on: ubuntu-latest
     steps:
     - name: Set up Go
@@ -15,10 +15,10 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v3
     - name: Build Kakfa PG demo
-      working-directory: kafka-pg-demo
+      working-directory: go/kafka-pg-demo
       run: go build -mod=vendor ./...
   golangci:
-    name: golangci-lint
+    name: Kafka PG Demo Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-go@v3
@@ -29,17 +29,17 @@ jobs:
         uses: golangci/golangci-lint-action@v3
         with:
           args: --timeout 4m0s
-          working-directory: kafka-pg-demo
+          working-directory: go/kafka-pg-demo
   vet:
-    name: Vet
+    name: Kafka PG Demo Vet
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Vet for kafka-pg-demo
-        working-directory: kafka-pg-demo
+        working-directory: go/kafka-pg-demo
         run: go vet ./...
   test:
-    name: Test
+    name: Kafka PG Demo Test
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
@@ -48,11 +48,11 @@ jobs:
         with:
           go-version: ^1.19
       - name: Run tests for kafka-pg-demo
-        working-directory: kafka-pg-demo
+        working-directory: go/kafka-pg-demo
         run: |
          go test -v ./...
   run:
-    name: Run
+    name: Kafka PG Demo Run
     needs: [ build ]
     runs-on: ubuntu-latest
     steps:
@@ -63,7 +63,7 @@ jobs:
         with:
           go-version: ^1.19
       - name: Run simple with CLI
-        working-directory: kafka-pg-demo
+        working-directory: go/kafka-pg-demo
         run: |
           go mod vendor
           meroxa apps run
