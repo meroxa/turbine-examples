@@ -76,4 +76,4 @@ jobs:
         run: |
           go mod vendor
           ls -lah
-          meroxa apps run --path "$GITHUB_WORKSPACE/go/flatten"
+          meroxa apps run --path ${{ github.workspace }}/go/flatten"
