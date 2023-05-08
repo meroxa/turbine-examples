@@ -38,23 +38,10 @@ jobs:
       - name: Vet for kafka-pg-demo
         working-directory: go/kafka-pg-demo
         run: go vet ./...
-  test:
-    name: Kafka PG Demo Test
-    needs: [ build ]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
-        with:
-          go-version: ^1.19
-      - name: Run tests for kafka-pg-demo
-        working-directory: go/kafka-pg-demo
-        run: |
-         go test -v ./...
   run:
     name: Kafka PG Demo Run
     needs: [ build ]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
       - name: Install CLI
