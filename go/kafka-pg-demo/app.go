@@ -34,7 +34,7 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	err = dest.WriteWithConfig(res, "inbound_events", turbine.ResourceConfigs{
+	err = dest.WriteWithConfig(res, "inbound_events", turbine.ConnectionOptions{
 		{Field: "key.converter", Value: "org.apache.kafka.connect.storage.StringConverter"},
 		{Field: "key.converter.schemas.enable", Value: "true"},
 	})

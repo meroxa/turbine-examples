@@ -71,4 +71,5 @@ jobs:
         working-directory: go/flatten
         run: |
           go mod vendor
+          echo $PWD
           meroxa apps run
