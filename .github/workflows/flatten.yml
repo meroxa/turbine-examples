@@ -72,8 +72,8 @@ jobs:
         with:
           go-version: ^1.19
       - name: Run flatten with CLI
-        working-directory: go/flatten
+        working-directory: ${{ github.workspace }}/go/flatten
         run: |
           go mod vendor
           ls -lah
-          meroxa apps run --path ${{ github.workspace }}/go/flatten"
+          meroxa apps run --path ${{ github.workspace }}/go/flatten
