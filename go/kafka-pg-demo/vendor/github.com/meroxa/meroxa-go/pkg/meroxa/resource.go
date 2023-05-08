@@ -77,6 +77,20 @@ type Resource struct {
 	UpdatedAt   time.Time              `json:"updated_at"`
 }
 
+// ResourceIntrospection represents the introspection results of a Resource
+type ResourceIntrospection struct {
+	ID              int64               `json:"id"`
+	AccountID       int                 `json:"account_id"`
+	UUID            string              `json:"uuid"`
+	ResourceID      int                 `json:"resource_id"`
+	Collections     []string            `json:"collections,omitempty"`
+	Schemas         map[string]string   `json:"schemas,omitempty"`
+	Capabilities    map[string]string   `json:"capabilities,omitempty"`
+	Samples         map[string][]string `json:"samples,omitempty"`
+	ResourceVersion string              `json:"resource_version"`
+	IntrospectedAt  time.Time           `json:"introspected_at"`
+}
+
 // UpdateResourceInput represents the Meroxa Resource we're updating in the Meroxa API
 type UpdateResourceInput struct {
 	Name        string                  `json:"name,omitempty"`
@@ -95,7 +109,7 @@ func (c *client) CreateResource(ctx context.Context, input *CreateResourceInput)
 		return nil, err
 	}
 
-	resp, err := c.MakeRequest(ctx, http.MethodPost, ResourcesBasePath, input, nil)
+	resp, err := c.MakeRequest(ctx, http.MethodPost, ResourcesBasePath, input, nil, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -126,7 +140,7 @@ func (c *client) UpdateResource(ctx context.Context, nameOrID string, input *Upd
 		}
 	}
 
-	resp, err := c.MakeRequest(ctx, http.MethodPatch, fmt.Sprintf("%s/%s", ResourcesBasePath, nameOrID), input, nil)
+	resp, err := c.MakeRequest(ctx, http.MethodPatch, fmt.Sprintf("%s/%s", ResourcesBasePath, nameOrID), input, nil, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -161,7 +175,7 @@ func (c *client) performResourceAction(ctx context.Context, nameOrID string, act
 		Action: action,
 	}
 
-	resp, err := c.MakeRequest(ctx, http.MethodPost, path, body, nil)
+	resp, err := c.MakeRequest(ctx, http.MethodPost, path, body, nil, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -180,9 +194,30 @@ func (c *client) performResourceAction(ctx context.Context, nameOrID string, act
 	return &rr, nil
 }
 
+// IntrospectResource returns introspection results of a Resource.
+func (c *client) IntrospectResource(ctx context.Context, nameOrUUID string) (*ResourceIntrospection, error) {
+	path := fmt.Sprintf("%s/%s/introspection", ResourcesBasePath, nameOrUUID)
+	resp, err := c.MakeRequest(ctx, http.MethodGet, path, nil, nil, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	err = handleAPIErrors(resp)
+	if err != nil {
+		return nil, err
+	}
+
+	var ri ResourceIntrospection
+	err = json.NewDecoder(resp.Body).Decode(&ri)
+	if err != nil {
+		return nil, err
+	}
+	return &ri, nil
+}
+
 // ListResources returns an array of Resources (scoped to the calling user)
 func (c *client) ListResources(ctx context.Context) ([]*Resource, error) {
-	resp, err := c.MakeRequest(ctx, http.MethodGet, ResourcesBasePath, nil, nil)
+	resp, err := c.MakeRequest(ctx, http.MethodGet, ResourcesBasePath, nil, nil, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -205,7 +240,7 @@ func (c *client) ListResources(ctx context.Context) ([]*Resource, error) {
 func (c *client) GetResourceByNameOrID(ctx context.Context, nameOrID string) (*Resource, error) {
 	path := fmt.Sprintf("%s/%s", ResourcesBasePath, nameOrID)
 
-	resp, err := c.MakeRequest(ctx, http.MethodGet, path, nil, nil)
+	resp, err := c.MakeRequest(ctx, http.MethodGet, path, nil, nil, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -228,7 +263,7 @@ func (c *client) GetResourceByNameOrID(ctx context.Context, nameOrID string) (*R
 func (c *client) DeleteResource(ctx context.Context, nameOrID string) error {
 	path := fmt.Sprintf("%s/%s", ResourcesBasePath, nameOrID)
 
-	resp, err := c.MakeRequest(ctx, http.MethodDelete, path, nil, nil)
+	resp, err := c.MakeRequest(ctx, http.MethodDelete, path, nil, nil, nil)
 	if err != nil {
 		return err
 	}

@@ -11,8 +11,6 @@ import (
 	"strings"
 
 	"github.com/google/uuid"
-	"github.com/volatiletech/null/v8"
-
 	"github.com/meroxa/meroxa-go/pkg/meroxa"
 	"github.com/meroxa/turbine-go"
 )
@@ -83,7 +81,7 @@ func (t *Turbine) createApplication(ctx context.Context) error {
 		Name:     t.config.Name,
 		Language: "golang",
 		GitSha:   t.gitSha,
-		Pipeline: meroxa.EntityIdentifier{UUID: null.StringFrom(pipelineUUID)},
+		Pipeline: meroxa.EntityIdentifier{UUID: pipelineUUID},
 	}
 	a, err := t.client.CreateApplication(ctx, inputCreateApp)
 	t.appUUID = a.UUID
@@ -137,7 +135,7 @@ type Resource struct {
 	v           *Turbine
 }
 
-func (r *Resource) Records(collection string, cfg turbine.ResourceConfigs) (turbine.Records, error) {
+func (r *Resource) Records(collection string, cfg turbine.ConnectionOptions) (turbine.Records, error) {
 	r.Collection = collection
 	r.Source = true
 
@@ -145,9 +143,15 @@ func (r *Resource) Records(collection string, cfg turbine.ResourceConfigs) (turb
 		return turbine.Records{}, nil
 	}
 
+	connectorConfig := cfg.ToMap()
+	switch r.Type {
+	case "kafka", string(meroxa.ResourceTypeConfluentCloud):
+		connectorConfig["conduit"] = "true" // only support Kafka connectors using Conduit so this is safe
+	}
+
 	ci := &meroxa.CreateConnectorInput{
 		ResourceName:  r.Name,
-		Configuration: cfg.ToMap(),
+		Configuration: connectorConfig,
 		Type:          meroxa.ConnectorTypeSource,
 		Input:         collection,
 		PipelineName:  r.v.config.Pipeline,
@@ -170,19 +174,23 @@ func (r *Resource) Records(collection string, cfg turbine.ResourceConfigs) (turb
 }
 
 func (r *Resource) Write(rr turbine.Records, collection string) error {
-	r.Collection = collection
-	r.Destination = true
-	return r.WriteWithConfig(rr, collection, turbine.ResourceConfigs{})
+	return r.WriteWithConfig(rr, collection, turbine.ConnectionOptions{})
 }
 
-func (r *Resource) WriteWithConfig(rr turbine.Records, collection string, cfg turbine.ResourceConfigs) error {
+func (r *Resource) WriteWithConfig(rr turbine.Records, collection string, cfg turbine.ConnectionOptions) error {
 	// bail if dryrun
 	if r.client == nil {
 		return nil
 	}
 
+	r.Collection = collection
+	r.Destination = true
+
 	connectorConfig := cfg.ToMap()
 	switch r.Type {
+	case "kafka", string(meroxa.ResourceTypeConfluentCloud):
+		connectorConfig["conduit"] = "true" // only support Kafka connectors using Conduit so this is safe
+		connectorConfig["topic"] = strings.ToLower(collection)
 	case "redshift", "postgres", "mysql", "sqlserver": // JDBC sink
 		connectorConfig["table.name.format"] = strings.ToLower(collection)
 	case "mongodb":
@@ -313,6 +321,6 @@ func (t Turbine) RegisterSecret(name string) error {
 	return nil
 }
 
-func (t Turbine) HandleSpec() (string, error) {
+func (t Turbine) DeploymentSpec() (string, error) {
 	panic("unimplemented")
 }

@@ -16,29 +16,42 @@ const (
 )
 
 const applicationsBasePath = "/v1/applications"
+const v2applicationsBasePath = "/v2/applications"
+
+type ResourceCollection struct {
+	Name        string `json:"name,omitempty"`
+	Source      string `json:"source,omitempty"`
+	Destination string `json:"destination,omitempty"`
+}
+
+type ApplicationResource struct {
+	EntityIdentifier
+	Collection ResourceCollection `json:"collection,omitempty"`
+}
 
 // Application represents the Meroxa Application type within the Meroxa API
 type Application struct {
-	UUID       string             `json:"uuid"`
-	Name       string             `json:"name"`
-	Language   string             `json:"language"`
-	GitSha     string             `json:"git_sha"`
-	Status     ApplicationStatus  `json:"status,omitempty"`
-	Pipeline   EntityIdentifier   `json:"pipeline,omitempty"`
-	Connectors []EntityIdentifier `json:"connectors,omitempty"`
-	Functions  []EntityIdentifier `json:"functions,omitempty"`
-	Resources  []EntityIdentifier `json:"resources,omitempty"`
-	CreatedAt  time.Time          `json:"created_at"`
-	UpdatedAt  time.Time          `json:"updated_at"`
-	DeletedAt  time.Time          `json:"deleted_at,omitempty"`
+	UUID        string                `json:"uuid"`
+	Name        string                `json:"name"`
+	Language    string                `json:"language"`
+	GitSha      string                `json:"git_sha,omitempty"`
+	Status      ApplicationStatus     `json:"status,omitempty"`
+	Pipeline    EntityIdentifier      `json:"pipeline,omitempty"`
+	Connectors  []EntityIdentifier    `json:"connectors,omitempty"`
+	Functions   []EntityIdentifier    `json:"functions,omitempty"`
+	Resources   []ApplicationResource `json:"resources,omitempty"`
+	Deployments []EntityIdentifier    `json:"deployments,omitempty"`
+	CreatedAt   time.Time             `json:"created_at"`
+	UpdatedAt   time.Time             `json:"updated_at"`
+	DeletedAt   time.Time             `json:"deleted_at,omitempty"`
 }
 
 // CreateApplicationInput represents the input for a Meroxa Application create operation in the API
 type CreateApplicationInput struct {
 	Name     string           `json:"name"`
 	Language string           `json:"language"`
-	GitSha   string           `json:"git_sha"`
-	Pipeline EntityIdentifier `json:"pipeline"`
+	GitSha   string           `json:"git_sha,omitempty"`
+	Pipeline EntityIdentifier `json:"pipeline,omitempty"`
 }
 
 type ApplicationStatus struct {
@@ -47,7 +60,7 @@ type ApplicationStatus struct {
 }
 
 func (c *client) CreateApplication(ctx context.Context, input *CreateApplicationInput) (*Application, error) {
-	resp, err := c.MakeRequest(ctx, http.MethodPost, applicationsBasePath, input, nil)
+	resp, err := c.MakeRequest(ctx, http.MethodPost, applicationsBasePath, input, nil, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -66,8 +79,26 @@ func (c *client) CreateApplication(ctx context.Context, input *CreateApplication
 	return a, nil
 }
 
+func (c *client) CreateApplicationV2(ctx context.Context, input *CreateApplicationInput) (*Application, error) {
+	resp, err := c.MakeRequest(ctx, http.MethodPost, v2applicationsBasePath, input, nil, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if err = handleAPIErrors(resp); err != nil {
+		return nil, err
+	}
+
+	var a *Application
+	if err = json.NewDecoder(resp.Body).Decode(&a); err != nil {
+		return nil, err
+	}
+
+	return a, nil
+}
+
 func (c *client) DeleteApplication(ctx context.Context, name string) error {
-	resp, err := c.MakeRequest(ctx, http.MethodDelete, fmt.Sprintf("%s/%s", applicationsBasePath, name), nil, nil)
+	resp, err := c.MakeRequest(ctx, http.MethodDelete, fmt.Sprintf("%s/%s", applicationsBasePath, name), nil, nil, nil)
 	if err != nil {
 		return err
 	}
@@ -78,7 +109,7 @@ func (c *client) DeleteApplication(ctx context.Context, name string) error {
 // DeleteApplicationEntities does a bit more than DeleteApplication. Its main purpose is to remove underneath's app resources
 // even in the event the application didn't exist.
 func (c *client) DeleteApplicationEntities(ctx context.Context, name string) (*http.Response, error) {
-	respAppDelete, err := c.MakeRequest(ctx, http.MethodDelete, fmt.Sprintf("%s/%s", applicationsBasePath, name), nil, nil)
+	respAppDelete, err := c.MakeRequest(ctx, http.MethodDelete, fmt.Sprintf("%s/%s", applicationsBasePath, name), nil, nil, nil)
 	if err != nil {
 		return respAppDelete, err
 	}
@@ -132,7 +163,7 @@ func (c *client) DeleteApplicationEntities(ctx context.Context, name string) (*h
 }
 
 func (c *client) GetApplication(ctx context.Context, name string) (*Application, error) {
-	resp, err := c.MakeRequest(ctx, http.MethodGet, fmt.Sprintf("%s/%s", applicationsBasePath, name), nil, nil)
+	resp, err := c.MakeRequest(ctx, http.MethodGet, fmt.Sprintf("%s/%s", applicationsBasePath, name), nil, nil, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -152,7 +183,7 @@ func (c *client) GetApplication(ctx context.Context, name string) (*Application,
 }
 
 func (c *client) ListApplications(ctx context.Context) ([]*Application, error) {
-	resp, err := c.MakeRequest(ctx, http.MethodGet, applicationsBasePath, nil, nil)
+	resp, err := c.MakeRequest(ctx, http.MethodGet, applicationsBasePath, nil, nil, nil)
 	if err != nil {
 		return nil, err
 	}

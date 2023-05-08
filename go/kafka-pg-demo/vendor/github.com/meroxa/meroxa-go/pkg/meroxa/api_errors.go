@@ -2,9 +2,9 @@ package meroxa
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net/http"
+	"sort"
 	"strings"
 )
 
@@ -36,8 +36,16 @@ func (err *errResponse) Error() string {
 func mapToString(m map[string][]string) string {
 	s := ""
 	count := 1
-	for k, v := range m {
-		s = fmt.Sprintf("%s\n%d. %s: \"%s\"", s, count, k, strings.Join(v, `", "`))
+
+	// need to sort map keys separately
+	var mKeys []string
+	for k := range m {
+		mKeys = append(mKeys, k)
+	}
+	sort.Strings(mKeys)
+
+	for _, k := range mKeys {
+		s = fmt.Sprintf("%s\n%d. %s: \"%s\"", s, count, k, strings.Join(m[k], `", "`))
 		count++
 	}
 	return s
@@ -65,7 +73,7 @@ func parseErrorFromBody(resp *http.Response) (error, error) {
 	if err != nil {
 		// In cases we didn't receive a proper JSON response
 		if _, ok := err.(*json.SyntaxError); ok {
-			return nil, errors.New(fmt.Sprintf("%s %s", resp.Proto, resp.Status))
+			return nil, fmt.Errorf("%s %s", resp.Proto, resp.Status)
 		}
 
 		return nil, err
