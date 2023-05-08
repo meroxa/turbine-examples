@@ -1,8 +1,8 @@
 name: CI
 on:
   pull_request:
-    paths:
-      - 'kafka-pg-demop/**'
+#    paths:
+#      - 'kafka-pg-demop/**'
 jobs:
   build:
     name: Build
