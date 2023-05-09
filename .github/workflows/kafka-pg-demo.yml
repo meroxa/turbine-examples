@@ -1,8 +1,8 @@
 name: Kafka PG CI
 on:
   pull_request:
-#    paths:
-#    - go/kafka-pg-demo/**
+    paths:
+    - go/kafka-pg-demo/**
 jobs:
   build:
     name: Kafka PG Demo Build

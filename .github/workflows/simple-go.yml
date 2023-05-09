@@ -1,8 +1,8 @@
 name: Simple (go) CI
 on:
   pull_request:
-#    paths:
-#    - go/simple/**
+    paths:
+    - go/simple/**
 jobs:
   build:
     name: Simple (go) Build
