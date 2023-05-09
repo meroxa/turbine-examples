@@ -1,8 +1,8 @@
 name: Flatten CI
 on:
   pull_request:
-    paths:
-    - go/flatten/**
+#    paths:
+#    - go/flatten/**
 jobs:
   build:
     name: Flatten Build
