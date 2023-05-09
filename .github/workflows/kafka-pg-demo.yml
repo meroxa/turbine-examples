@@ -44,12 +44,14 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: Install CLI
         run: brew tap meroxa/taps && brew install meroxa
       - uses: actions/setup-go@v3
         with:
           go-version: ^1.19
-      - name: Run simple with CLI
+      - name: Run Kafka PG Demo with CLI
         working-directory: go/kafka-pg-demo
         run: |
           go mod vendor
