@@ -4,12 +4,12 @@ import (
 	"log"
 
 	// Dependencies of Turbine
-	"github.com/meroxa/turbine-go"
-	"github.com/meroxa/turbine-go/runner"
+	"github.com/meroxa/turbine-go/pkg/turbine"
+	"github.com/meroxa/turbine-go/pkg/turbine/cmd"
 )
 
 func main() {
-	runner.Start(App{})
+	cmd.Start(App{})
 }
 
 var _ turbine.App = (*App)(nil)
@@ -27,7 +27,10 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	res := v.Process(rr, Format{})
+	res, err := v.Process(rr, Format{})
+	if err != nil {
+		return err
+	}
 
 	dest, err := v.Resources("demopg")
 	if err != nil {
