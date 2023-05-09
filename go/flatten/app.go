@@ -23,12 +23,12 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	rr, err := source.Records("events", nil)
+	records, err := source.Records("events", nil)
 	if err != nil {
 		return err
 	}
 
-	res, err := v.Process(rr, Flatten{})
+	processed, err := v.Process(records, Flatten{})
 	if err != nil {
 		return err
 	}
@@ -38,7 +38,7 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	err = dest.Write(res, "collection_archive")
+	err = dest.Write(processed, "collection_archive")
 	if err != nil {
 		return err
 	}
