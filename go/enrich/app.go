@@ -3,12 +3,13 @@ package main
 import (
 	"log"
 
-	"github.com/meroxa/turbine-go"
-	"github.com/meroxa/turbine-go/runner"
+	// Dependencies of Turbine
+	"github.com/meroxa/turbine-go/pkg/turbine"
+	"github.com/meroxa/turbine-go/pkg/turbine/cmd"
 )
 
 func main() {
-	runner.Start(App{})
+	cmd.Start(App{})
 }
 
 var _ turbine.App = (*App)(nil)
@@ -21,7 +22,7 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	rr, err := db.Records("user_activity", nil) // rr is a collection of records, can't be inspected directly
+	records, err := db.Records("user_activity", nil) // rr is a collection of records, can't be inspected directly
 	if err != nil {
 		return err
 	}
@@ -30,7 +31,11 @@ func (a App) Run(v turbine.Turbine) error {
 	if err != nil {
 		return err
 	}
-	res := v.Process(rr, EnrichUserData{})
+
+	res, err := v.Process(records, EnrichUserData{})
+	if err != nil {
+		return err
+	}
 
 	err = db.Write(res, "user_activity_enriched")
 	if err != nil {
