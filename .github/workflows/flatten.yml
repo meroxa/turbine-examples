@@ -66,10 +66,8 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
       - name: Install CLI
-        run: brew tap meroxa/taps && brew install meroxa@2.18.0
+        run: brew tap meroxa/taps && brew install meroxa@v2.18.0
       - uses: actions/setup-go@v3
         with:
           go-version: ^1.19
