@@ -2,7 +2,7 @@ name: Enrich (go) CI
 on:
   pull_request:
     paths:
-      - 'go/enrich/**'
+      - go/enrich/**
 jobs:
   build:
     name: Enrich (Go) Build
