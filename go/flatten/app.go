@@ -4,13 +4,13 @@ import (
 	"log"
 
 	// Dependencies of Turbine
-	"github.com/meroxa/turbine-go"
-	"github.com/meroxa/turbine-go/runner"
-	"github.com/meroxa/turbine-go/transforms"
+	"github.com/meroxa/turbine-go/pkg/turbine"
+	"github.com/meroxa/turbine-go/pkg/turbine/cmd"
+	"github.com/meroxa/turbine-go/pkg/turbine/transforms"
 )
 
 func main() {
-	runner.Start(App{})
+	cmd.Start(App{})
 }
 
 var _ turbine.App = (*App)(nil)
@@ -28,7 +28,10 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	res := v.Process(rr, Flatten{})
+	res, err := v.Process(rr, Flatten{})
+	if err != nil {
+		return err
+	}
 
 	dest, err := v.Resources("destination_name")
 	if err != nil {
