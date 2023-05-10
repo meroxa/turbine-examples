@@ -9,7 +9,7 @@
     "util": "^0.12.5"
   },
   "devDependencies": {
-    "qunit": "^2.18.0"
+    "qunit": "^2.19.4"
   },
   "scripts": {
     "test": "qunit ./**.test.js"
