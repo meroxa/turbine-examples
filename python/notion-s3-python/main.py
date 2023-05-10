@@ -5,7 +5,6 @@ import sys
 
 from turbine.src.turbine_app import RecordList, TurbineApp
 
-
 logging.basicConfig(level=logging.INFO)
 
 def character_count(records: RecordList) -> RecordList:
