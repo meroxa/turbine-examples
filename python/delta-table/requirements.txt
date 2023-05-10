@@ -5,7 +5,7 @@ deltalake>=0.7.0
 pandas==1.5.2
 
 # Record enhancement example
-requests==2.28.2
+requests==2.30.0
 
 # Sentry.io Monitoring 
 sentry-sdk==1.14.0
