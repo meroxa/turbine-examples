@@ -27,7 +27,7 @@ jobs:
         with:
           go-version: ^1.19
       - uses: actions/checkout@v3
-      - name: Flatten vendor
+      - name: Flatten modules
         working-directory: go/flatten
         run: |
           go mod download
