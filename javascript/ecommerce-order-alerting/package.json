@@ -7,7 +7,7 @@
   },
 
   "devDependencies": {
-    "qunit": "^2.18.0"
+    "qunit": "^2.19.4"
   },
   "license": "MIT",
   "scripts": {
