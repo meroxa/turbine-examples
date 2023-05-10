@@ -4,7 +4,7 @@
   "main": "index.js",
   "dependencies": {
     "@meroxa/turbine-js-framework": "^1.1.2",
-    "algoliasearch": "^4.13.0"
+    "algoliasearch": "^4.17.0"
   },
   "devDependencies": {
     "qunit": "^2.18.0"
