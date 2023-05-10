@@ -1,12 +1,11 @@
 // const { formatPhone, googleMapsLookup, generateAddressObject } = require('./helpers.js');
 // import sha256 from 'crypto-js/sha256';
 
-
 exports.App = class App {
   processData(records) {
     for (const record of records) {
-      const dateTimeGmt = new Date().toGMTString()
-      console.log(`[DEBUG] Streaming Record To Destination: ${dateTimeGmt}`)
+      const dateTimeGmt = new Date().toGMTString();
+      console.log(`[DEBUG] Streaming Record To Destination: ${dateTimeGmt}`);
 
       // Encrypt data using a 3rd party library or package
       // record.set(
@@ -16,7 +15,7 @@ exports.App = class App {
 
       // Format Data via a custom function
       // record.set('phone_number', formatPhone(record.get('phone_number')))
-      
+
       // Enrich Data via an API
       // const addressLookupResults = await googleMapsLookup(record.get('address'))
       // const addressMetaData = generateAddressObject(addressLookupResults)
@@ -35,7 +34,7 @@ exports.App = class App {
     // Second, specify the table you want to access in your PostgreSQL DB
     let records = await source.records("User");
 
-		// Third, Process each record that comes in!
+    // Third, Process each record that comes in!
     let processed = await turbine.process(records, this.processData);
 
     // Fourth, identify your MongoDB destination resource configured in Step 1

@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "@meroxa/turbine-js-framework": "^1.1.2",
+    "@meroxa/turbine-js": "^2.0.0-alpha.6",
     "algoliasearch": "^4.17.0"
   },
   "devDependencies": {
+    "prettier": "2.8.8",
     "qunit": "^2.19.4"
   },
   "scripts": {

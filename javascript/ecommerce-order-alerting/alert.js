@@ -8,7 +8,7 @@ const https = require("https");
  * @return {Promise}
  */
 function sendSlackMessage(webhookURL, payload) {
-  const messageBody = {
+  let messageBody = {
     text: `A new order has arrived: ${JSON.stringify(payload)}`, // text
     icon_emoji: ":money:", // User icon, you can also use custom icons here
   };

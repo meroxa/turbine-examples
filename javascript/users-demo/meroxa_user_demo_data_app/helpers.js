@@ -1,19 +1,19 @@
 function formatPhone() {
-    // Custom logic to format phone numbers
-    return
+  // Custom logic to format phone numbers
+  return;
 }
 
 function googleMapsLookup() {
-    // Api call
-    return
+  // Api call
+  return;
 }
 
 function generateAddressObject() {
-    // Other helper function
+  // Other helper function
 }
 
 module.exports = {
-    formatPhone,
-    googleMapsLookup,
-    generateAddressObject,
-}
+  formatPhone,
+  googleMapsLookup,
+  generateAddressObject,
+};

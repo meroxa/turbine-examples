@@ -4,7 +4,7 @@ exports.App = class App {
   sendAlert(records) {
     records.forEach((record) => {
       let payload = record.value.payload;
-      sendSlackMessage(payload);
+      sendSlackMessage(process.env.SLACK_URL, payload);
     });
 
     return records;
@@ -15,7 +15,9 @@ exports.App = class App {
 
     let records = await source.records("customer_order");
 
-    let data = await turbine.process(records, this.sendAlert);
+    let data = await turbine.process(records, this.sendAlert, {
+      SLACK_URL: process.env.SLACK_URL,
+    });
 
     let destination = await turbine.resources("snowflake");
 
