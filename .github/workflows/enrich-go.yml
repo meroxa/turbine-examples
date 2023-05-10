@@ -1,8 +1,8 @@
 name: Enrich (go) CI
 on:
   pull_request:
-    paths:
-    - go/enrich/**
+#    paths:
+#    - go/enrich/**
 jobs:
   build:
     name: Enrich (Go) Build
@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v3
     - name: Build Enrich
       working-directory: go/enrich
-      run: go build -mod=vendor ./...
+      run: go build ./...
   golangci:
     name: Enrich (go) Lint
     runs-on: ubuntu-latest

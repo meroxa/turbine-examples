@@ -1,8 +1,8 @@
 name: Simple (go) CI
 on:
   pull_request:
-    paths:
-    - go/simple/**
+#    paths:
+#    - go/simple/**
 jobs:
   build:
     name: Simple (go) Build
@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@v3
     - name: Build simple
       working-directory: go/simple
-      run: go build -mod=vendor ./...
+      run: go build ./...
   golangci:
     name: Simple (go) Lint
     runs-on: ubuntu-latest
@@ -65,5 +65,5 @@ jobs:
       - name: Run simple with CLI
         working-directory: go/simple
         run: |
-          go mod vendor
+          go mod download
           meroxa apps run
