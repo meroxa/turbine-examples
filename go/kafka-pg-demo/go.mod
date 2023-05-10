@@ -2,32 +2,20 @@ module github.com/meroxa/kafka-pg-demo
 
 go 1.19
 
-require github.com/meroxa/turbine-go v0.0.0-20220906184519-091122051611
+require github.com/meroxa/turbine-go v1.0.1-0.20230501205136-88d57eab23fc
 
 require (
-	github.com/caarlos0/env/v6 v6.9.3 // indirect
-	github.com/cristalhq/jwt/v3 v3.1.0 // indirect
-	github.com/friendsofgo/errors v0.9.2 // indirect
-	github.com/gofrs/uuid v4.2.0+incompatible // indirect
-	github.com/golang/protobuf v1.5.2 // indirect
-	github.com/google/uuid v1.3.0 // indirect
-	github.com/meroxa/meroxa-go v0.0.0-20220711165903-c09da3162930 // indirect
-	github.com/oklog/run v1.1.1-0.20200508094559-c7096881717e // indirect
-	github.com/tidwall/gjson v1.14.3 // indirect
+	github.com/envoyproxy/protoc-gen-validate v1.0.0 // indirect
+	github.com/golang/protobuf v1.5.3 // indirect
+	github.com/meroxa/turbine-core v0.0.0-20230509170933-41432f2bb476 // indirect
+	github.com/tidwall/gjson v1.14.4 // indirect
 	github.com/tidwall/match v1.1.1 // indirect
-	github.com/tidwall/pretty v1.2.0 // indirect
+	github.com/tidwall/pretty v1.2.1 // indirect
 	github.com/tidwall/sjson v1.2.5 // indirect
-	github.com/volatiletech/inflect v0.0.1 // indirect
-	github.com/volatiletech/null/v8 v8.1.2 // indirect
-	github.com/volatiletech/randomize v0.0.1 // indirect
-	github.com/volatiletech/strmangle v0.0.4 // indirect
-	golang.org/x/net v0.0.0-20220706163947-c90051bbdb60 // indirect
-	golang.org/x/oauth2 v0.0.0-20220630143837-2104d58473e0 // indirect
-	golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f // indirect
-	golang.org/x/text v0.3.8 // indirect
-	golang.org/x/xerrors v0.0.0-20220609144429-65e65417b02f // indirect
-	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/genproto v0.0.0-20220707150051-590a5ac7bee1 // indirect
-	google.golang.org/grpc v1.47.0 // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	golang.org/x/net v0.10.0 // indirect
+	golang.org/x/sys v0.8.0 // indirect
+	golang.org/x/text v0.9.0 // indirect
+	google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4 // indirect
+	google.golang.org/grpc v1.55.0 // indirect
+	google.golang.org/protobuf v1.30.0 // indirect
 )

@@ -5,12 +5,13 @@ import (
 	"encoding/hex"
 	"log"
 
-	turbine "github.com/meroxa/turbine-go"
-	"github.com/meroxa/turbine-go/runner"
+	// Dependencies of Turbine
+	"github.com/meroxa/turbine-go/pkg/turbine"
+	"github.com/meroxa/turbine-go/pkg/turbine/cmd"
 )
 
 func main() {
-	runner.Start(App{})
+	cmd.Start(App{})
 }
 
 var _ turbine.App = (*App)(nil)
@@ -24,19 +25,21 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	rr, err := db.Records("user_activity", nil) // rr is a collection of records, can't be inspected directly
+	records, err := db.Records("user_activity", nil) // rr is a collection of records, can't be inspected directly
 	if err != nil {
 		return err
 	}
 
-	res := v.Process(rr, Anonymize{})
-	// second return is dead-letter queue
+	processed, err := v.Process(records, Anonymize{})
+	if err != nil {
+		return err
+	}
 
 	s3, err := v.Resources("s3")
 	if err != nil {
 		return err
 	}
-	err = s3.Write(res, "data-app-archive")
+	err = s3.Write(processed, "data-app-archive")
 	if err != nil {
 		return err
 	}

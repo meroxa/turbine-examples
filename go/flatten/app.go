@@ -4,13 +4,13 @@ import (
 	"log"
 
 	// Dependencies of Turbine
-	"github.com/meroxa/turbine-go"
-	"github.com/meroxa/turbine-go/runner"
-	"github.com/meroxa/turbine-go/transforms"
+	"github.com/meroxa/turbine-go/pkg/turbine"
+	"github.com/meroxa/turbine-go/pkg/turbine/cmd"
+	"github.com/meroxa/turbine-go/pkg/turbine/transforms"
 )
 
 func main() {
-	runner.Start(App{})
+	cmd.Start(App{})
 }
 
 var _ turbine.App = (*App)(nil)
@@ -23,19 +23,22 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	rr, err := source.Records("events", nil)
+	records, err := source.Records("events", nil)
 	if err != nil {
 		return err
 	}
 
-	res := v.Process(rr, Flatten{})
+	processed, err := v.Process(records, Flatten{})
+	if err != nil {
+		return err
+	}
 
 	dest, err := v.Resources("destination_name")
 	if err != nil {
 		return err
 	}
 
-	err = dest.Write(res, "collection_archive")
+	err = dest.Write(processed, "collection_archive")
 	if err != nil {
 		return err
 	}

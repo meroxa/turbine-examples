@@ -1,0 +1,69 @@
+name: Simple (go) CI
+on:
+  pull_request:
+    paths:
+    - go/simple/**
+jobs:
+  build:
+    name: Simple (go) Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: ^1.19
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v3
+    - name: Build simple
+      working-directory: go/simple
+      run: go build -mod=vendor ./...
+  golangci:
+    name: Simple (go) Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ^1.19
+      - uses: actions/checkout@v3
+      - name: golangci-lint for simple
+        uses: golangci/golangci-lint-action@v3
+        with:
+          args: --timeout 4m0s
+          working-directory: go/simple
+  vet:
+    name: Simple (go) Vet
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Vet for simple
+        working-directory: go/simple
+        run: go vet ./...
+  test:
+    name: Simple (go) Test
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ^1.19
+      - name: Run tests for simple
+        working-directory: go/simple
+        run: |
+         go test -v ./...
+  run:
+    name: Simple (go) Run
+    needs: [ build ]
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install CLI
+        run: brew tap meroxa/taps && brew install meroxa
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ^1.19
+      - name: Run simple with CLI
+        working-directory: go/simple
+        run: |
+          go mod vendor
+          meroxa apps run

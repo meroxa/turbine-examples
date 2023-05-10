@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/meroxa/turbine-go"
 	"testing"
+
+	"github.com/meroxa/turbine-go/pkg/turbine"
 )
 
 func TestFlattenTransform(t *testing.T) {

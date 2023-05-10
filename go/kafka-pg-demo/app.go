@@ -4,12 +4,12 @@ import (
 	"log"
 
 	// Dependencies of Turbine
-	"github.com/meroxa/turbine-go"
-	"github.com/meroxa/turbine-go/runner"
+	"github.com/meroxa/turbine-go/pkg/turbine"
+	"github.com/meroxa/turbine-go/pkg/turbine/cmd"
 )
 
 func main() {
-	runner.Start(App{})
+	cmd.Start(App{})
 }
 
 var _ turbine.App = (*App)(nil)
@@ -22,19 +22,22 @@ func (a App) Run(v turbine.Turbine) error {
 		return err
 	}
 
-	rr, err := source.Records("inbound", nil)
+	records, err := source.Records("inbound", nil)
 	if err != nil {
 		return err
 	}
 
-	res := v.Process(rr, Format{})
+	processed, err := v.Process(records, Format{})
+	if err != nil {
+		return err
+	}
 
 	dest, err := v.Resources("demopg")
 	if err != nil {
 		return err
 	}
 
-	err = dest.WriteWithConfig(res, "inbound_events", turbine.ResourceConfigs{
+	err = dest.WriteWithConfig(processed, "inbound_events", turbine.ConnectionOptions{
 		{Field: "key.converter", Value: "org.apache.kafka.connect.storage.StringConverter"},
 		{Field: "key.converter.schemas.enable", Value: "true"},
 	})

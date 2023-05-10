@@ -1,0 +1,56 @@
+name: Kafka PG CI
+on:
+  pull_request:
+    paths:
+    - go/kafka-pg-demo/**
+jobs:
+  build:
+    name: Kafka PG Demo Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: ^1.19
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v3
+    - name: Build Kakfa PG demo
+      working-directory: go/kafka-pg-demo
+      run: go build -mod=vendor ./...
+  golangci:
+    name: Kafka PG Demo Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ^1.19
+      - uses: actions/checkout@v3
+      - name: golangci-lint for kafka-pg-demo
+        uses: golangci/golangci-lint-action@v3
+        with:
+          args: --timeout 4m0s
+          working-directory: go/kafka-pg-demo
+  vet:
+    name: Kafka PG Demo Vet
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Vet for kafka-pg-demo
+        working-directory: go/kafka-pg-demo
+        run: go vet ./...
+  run:
+    name: Kafka PG Demo Run
+    needs: [ build ]
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install CLI
+        run: brew tap meroxa/taps && brew install meroxa
+      - uses: actions/setup-go@v3
+        with:
+          go-version: ^1.20
+      - name: Run Kafka PG Demo with CLI
+        working-directory: go/kafka-pg-demo
+        run: |
+          go mod vendor
+          meroxa apps run
