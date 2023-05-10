@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Set up Go
-      uses: actions/setup-go@v3
+      uses: actions/setup-go@v4
       with:
         go-version: ^1.19
     - name: Check out code into the Go module directory
@@ -23,7 +23,7 @@ jobs:
     name: Flatten Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v4
         with:
           go-version: ^1.19
       - uses: actions/checkout@v3
@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v4
         with:
           go-version: ^1.19
       - name: Run tests for flatten
@@ -68,7 +68,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install CLI
         run: brew tap meroxa/taps && brew install meroxa
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v4
         with:
           go-version: ^1.19
       - name: Run flatten with CLI
