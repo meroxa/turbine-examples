@@ -1,8 +1,8 @@
 name: Javascript CI
 on:
   pull_request:
-#    paths:
-#    - javascript/**
+    paths:
+    - javascript/**
 jobs:
   pretty:
     name: Check style
