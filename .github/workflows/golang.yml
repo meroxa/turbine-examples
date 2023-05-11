@@ -1,0 +1,129 @@
+name: Golang CI
+on:
+  pull_request:
+    paths:
+    - go/**
+jobs:
+  build:
+    name: Build Golang examples
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: ^1.20
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v3
+    - name: Build Enrich
+      working-directory: go/enrich
+      run: go build ./...
+    - name: Build Flatten
+      working-directory: go/flatten
+      run: | # flatten is special
+        go mod download
+        go build ./...
+    - name: Build Kakfa PG demo
+      working-directory: go/kafka-pg-demo
+      run: go build ./...
+    - name: Build simple
+      working-directory: go/simple
+      run: go build ./...
+  golangci:
+    name: Lint Golang examples
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-go@v4
+        with:
+          go-version: ^1.20
+      - uses: actions/checkout@v3
+      - name: golangci-lint for enrich
+        uses: golangci/golangci-lint-action@v3
+        with:
+          args: --timeout 4m0s
+          working-directory: go/enrich
+      - name: Flatten modules
+        working-directory: go/flatten
+        run: |
+          go mod download
+      - name: golangci-lint for flatten
+        uses: golangci/golangci-lint-action@v3
+        with:
+          args: --timeout 4m0s
+          working-directory: go/flatten
+      - name: golangci-lint for kafka-pg-demo
+        uses: golangci/golangci-lint-action@v3
+        with:
+          args: --timeout 4m0s
+          working-directory: go/kafka-pg-demo
+      - name: golangci-lint for simple
+        uses: golangci/golangci-lint-action@v3
+        with:
+          args: --timeout 4m0s
+          working-directory: go/simple
+  vet:
+    name: Vet Golang examples
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Vet for enrich
+        working-directory: go/enrich
+        run: go vet ./...
+      - name: Vet for flatten
+        working-directory: go/flatten
+        run: |
+          go mod download
+          go vet ./...
+      - name: Vet for kafka-pg-demo
+        working-directory: go/kafka-pg-demo
+        run: go vet ./...
+      - name: Vet for simple
+        working-directory: go/simple
+        run: go vet ./...
+  test:
+    name: Test Golang examples
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v4
+        with:
+          go-version: ^1.20
+      - name: Run tests for enrich
+        working-directory: go/enrich
+        run: |
+         go test -v ./...
+      - name: Run tests for flatten
+        working-directory: go/flatten
+        run: |
+          go mod download
+          go test -v ./...
+      - name: Run tests for simple
+        working-directory: go/simple
+        run: |
+         go test -v ./...
+  run:
+    name: Run Golang examples
+    needs: [ build ]
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install CLI
+        run: brew tap meroxa/taps && brew install meroxa
+      - uses: actions/setup-go@v4
+        with:
+          go-version: ^1.20
+      - name: Run flatten with CLI
+        working-directory: go/flatten
+        run: |
+          go mod download
+          meroxa apps run
+      - name: Run Kafka PG Demo with CLI
+        working-directory: go/kafka-pg-demo
+        run: |
+          go mod download
+          meroxa apps run
+      - name: Run simple with CLI
+        working-directory: go/simple
+        run: |
+          go mod download
+          meroxa apps run
