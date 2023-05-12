@@ -1,0 +1,35 @@
+name: Ruby CI
+on:
+  pull_request:
+    paths:
+    - ruby/**
+jobs:
+  rake:
+    name: Run rake against Ruby examples
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.1
+          bundler-cache: true
+      - name: Run the default task of simple
+        working-directory: ruby/simple
+        run: bundle exec rake
+  run:
+    name: Run Ruby examples
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install CLI
+        run: brew tap meroxa/taps && brew install meroxa
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.2.1
+          bundler-cache: true
+      - name: Run simple with CLI
+        working-directory: ruby/simple
+        run: |
+          meroxa apps run

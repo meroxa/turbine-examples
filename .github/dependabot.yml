@@ -218,3 +218,9 @@ updates:
       prefix: "Dockerfile:"
 
   # Maintain dependencies for Ruby
+  - package-ecosystem: 'bundler'
+    directory: '/ruby/simple'
+    schedule:
+      interval: 'weekly'
+    commit-message:
+      prefix: "Gemfile:"
