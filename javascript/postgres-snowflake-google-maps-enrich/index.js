@@ -54,7 +54,7 @@ exports.App = class App {
     // Optional, Process each record that comes in!
     let transformed = await turbine.process(records, this.transform);
 
-    // Third, identify your Snwoflake resource name
+    // Third, identify your Snowflake resource name
     let destination = await turbine.resources("snowflake");
 
     // Finally, specify which table to write that data to

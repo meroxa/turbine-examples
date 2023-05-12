@@ -3,12 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "@meroxa/turbine-js-framework": "^1.1.2"
+    "@meroxa/turbine-js": "^2.0.0-alpha.6"
   },
   "devDependencies": {
+    "prettier": "2.8.8",
     "qunit": "^2.18.0"
   },
   "scripts": {
-    "test": "qunit ./**.test.js"
+    "prettier:check": "prettier --check './**/*.{js,ts,json}'",
+    "prettier:makeitpretty": "prettier --write './**/*.{js,ts,json}'",
+    "test": "qunit ./**.test.js",
+    "dev": "meroxa app run",
+    "deploy": "meroxa app deploy"
   }
 }
