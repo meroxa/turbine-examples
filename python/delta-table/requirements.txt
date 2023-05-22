@@ -1,4 +1,4 @@
-turbine-py==1.8.3
+turbine-py==2.0.0
 
 # Deltatable/delta lake libraries
 deltalake>=0.7.0
