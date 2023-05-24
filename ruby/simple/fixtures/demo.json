@@ -7,7 +7,7 @@
         },
         {
             "key": "2",
-            "value": {"message":"hi"},
+            "value": {"message":"hi", "email": "example@example.com"},
             "timestamp": "1662758904"
         }
     ]

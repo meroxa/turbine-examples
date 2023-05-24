@@ -48,7 +48,6 @@ end
 
 class Passthrough < TurbineRb::Process
   def call(records:)
-    puts "got records: #{records}"
     # To get the value of unformatted records, use record .value getter method
     # records.map { |r| puts r.value }
     #
