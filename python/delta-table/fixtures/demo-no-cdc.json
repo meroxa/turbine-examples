@@ -1,11 +1,4 @@
 {
-    "users": {
-      "100": {
-        "id": "100",
-        "username": "alice",
-        "email": "alice@example.com"
-      }
-    },
     "user_activity": [
       {
         "key": "1",

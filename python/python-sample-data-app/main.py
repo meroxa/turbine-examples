@@ -2,7 +2,7 @@ import hashlib
 import logging
 import sys
 
-from turbine.runtime import RecordList, Runtime
+from turbine.src.turbine_app import RecordList, TurbineApp
 
 logging.basicConfig(level=logging.INFO)
 
@@ -28,7 +28,7 @@ def anonymize(records: RecordList) -> RecordList:
 
 class App:
     @staticmethod
-    async def run(turbine: Runtime):
+    async def run(turbine: TurbineApp):
         try:
             # To configure your data stores as resources on the Meroxa Platform
             # use the Meroxa Dashboard, CLI, or Meroxa Terraform Provider.

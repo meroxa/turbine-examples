@@ -1,6 +1,6 @@
 import logging
 
-from turbine.runtime import RecordList, Runtime
+from turbine.src.turbine_app import RecordList, TurbineApp
 
 from enrich import enrich_user_email
 
@@ -27,7 +27,7 @@ def enrich_data(records: RecordList) -> RecordList:
 
 class App:
     @staticmethod
-    async def run(turbine: Runtime):
+    async def run(turbine: TurbineApp):
 
         logging.basicConfig(level=logging.INFO)
 

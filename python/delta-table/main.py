@@ -3,7 +3,7 @@ import logging
 import sys
 
 import sentry_sdk
-from turbine.runtime import RecordList, Runtime
+from turbine.src.turbine_app import RecordList, TurbineApp
 
 import delta  # Our Delta Lake writing code
 import enrich  # Our Data Enrichment code
@@ -40,7 +40,7 @@ def format_and_enrich(records: RecordList) -> RecordList:
 
 class App:
     @staticmethod
-    async def run(turbine: Runtime):
+    async def run(turbine: TurbineApp):
         try:
 
             # secrets for writing to a S3 deltatable

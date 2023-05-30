@@ -2,6 +2,6 @@
     "name": "notion-s3-python",
     "language": "python",
     "resources": {
-        "notion": "fixtures/notion-example.json"
+        "company-notion": "fixtures/notion-example.json"
     }
 }
