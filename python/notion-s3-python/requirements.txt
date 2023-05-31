@@ -1,1 +1,1 @@
-turbine-py==1.8.3
+turbine-py>=2.0.0

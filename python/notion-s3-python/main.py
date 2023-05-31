@@ -1,9 +1,10 @@
+from curses.ascii import NUL
 import hashlib
 import logging
 import sys
 
-from turbine.runtime import RecordList
-from turbine.runtime import Runtime
+from turbine.src.turbine_app import RecordList, TurbineApp
+
 
 logging.basicConfig(level=logging.INFO)
 
@@ -23,7 +24,7 @@ def character_count(records: RecordList) -> RecordList:
 
 class App:
     @staticmethod
-    async def run(turbine: Runtime):
+    async def run(turbine: TurbineApp):
         try:
              # Source Notion Resource
             source = await turbine.resources("company-notion")

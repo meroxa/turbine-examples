@@ -5,7 +5,7 @@ import hashlib
 
 from datetime import date
 
-from turbine.runtime import RecordList, Runtime
+from turbine.src.turbine_app import RecordList, TurbineApp
 
 from alert import send_slack_alert
 from constants import WEBHOOK_URL
@@ -41,7 +41,7 @@ def send_alert(records: RecordList) -> RecordList:
 
 class App:
     @staticmethod
-    async def run(turbine: Runtime):
+    async def run(turbine: TurbineApp):
 
         try:
             # Postgres database being monitored for changes
