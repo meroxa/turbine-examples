@@ -31,7 +31,7 @@ class App:
             # Currently, we ignore the collection name passed in 
             # for Notion resources. Your turbine app will pull all 
             # pages and databases the Notion integration has access to. 
-            records = await source.records("")
+            records = await source.records("*")
 
             # Our function which performs character counts
             counted_records = await turbine.process(records, character_count)
