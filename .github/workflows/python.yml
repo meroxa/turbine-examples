@@ -1,6 +1,9 @@
 name: Python CI
 on:
   pull_request:
+    paths:
+    - python/**
+  workflow_dispatch:
 jobs:
   lint:
     name: Lint Python examples

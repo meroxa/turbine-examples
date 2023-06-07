@@ -1,6 +1,9 @@
 name: Javascript CI
 on:
   pull_request:
+    paths:
+    - javascript/**
+  workflow_dispatch:
 jobs:
   pretty:
     name: Check style
