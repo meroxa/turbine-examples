@@ -1,8 +1,6 @@
 name: Golang CI
 on:
   pull_request:
-    paths:
-    - go/**
 jobs:
   build:
     name: Build Golang examples
