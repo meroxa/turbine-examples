@@ -15,7 +15,7 @@ jobs:
         uses: psf/black@stable
         with:
           src: "./python"
-          options: "--diff --color"
+          options: "--diff --color --check"
   tests:
     name: Test Python examples
     runs-on: ubuntu-latest
