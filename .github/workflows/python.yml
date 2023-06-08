@@ -11,30 +11,10 @@ jobs:
     steps:
       - name: checkout examples
         uses: actions/checkout@v3
-      - name: lint for delta-table
+      - name: lint for Python examples
         uses: psf/black@stable
         with:
-          working-directory: python/delta-table
-          options: "--diff --color"
-      - name: lint for ecommerce-order-alerting
-        uses: psf/black@stable
-        with:
-          working-directory: python/ecommerce-order-alerting
-          options: "--diff --color"
-      - name: lint for enrich
-        uses: psf/black@stable
-        with:
-          working-directory: python/enrich
-          options: "--diff --color"
-      - name: lint for notion-s3-python
-        uses: psf/black@stable
-        with:
-          working-directory: python/notion-s3-python
-          options: "--diff --color"
-      - name: lint for python-sample-data-app
-        uses: psf/black@stable
-        with:
-          working-directory: python/python-sample-data-app
+          working-directory: python
           options: "--diff --color"
   tests:
     name: Test Python examples
@@ -43,56 +23,12 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          working-directory: python/delta-table
+          working-directory: python
           python-version: '3.9'
           cache: 'pip'
           cache-dependency-path: '*.txt'
-      - name: run tests using tox for delta-table
-        working-directory: python/delta-table
-        run: |
-          pip install tox
-          tox -e py39
-      - uses: actions/setup-python@v4
-        with:
-          working-directory: python/ecommerce-order-alerting
-          python-version: '3.9'
-          cache: 'pip'
-          cache-dependency-path: '*.txt'
-      - name: run tests using tox for ecommerce-order-alerting
-        working-directory: python/ecommerce-order-alerting
-        run: |
-          pip install tox
-          tox -e py39
-      - uses: actions/setup-python@v4
-        with:
-          working-directory: python/enrich
-          python-version: '3.9'
-          cache: 'pip'
-          cache-dependency-path: '*.txt'
-      - name: run tests using tox for enrich
-        working-directory: python/enrich
-        run: |
-          pip install tox
-          tox -e py39
-      - uses: actions/setup-python@v4
-        with:
-          working-directory: python/notion-s3-python
-          python-version: '3.9'
-          cache: 'pip'
-          cache-dependency-path: '*.txt'
-      - name: run tests using tox for notion-s3-python
-        working-directory: python/notion-s3-python
-        run: |
-          pip install tox
-          tox -e py39
-      - uses: actions/setup-python@v4
-        with:
-          working-directory: python/python-sample-data-app
-          python-version: '3.9'
-          cache: 'pip'
-          cache-dependency-path: '*.txt'
-      - name: run tests using tox for python-sample-data-app
-        working-directory: python/python-sample-data-app
+      - name: run tests using tox for all Python examples
+        working-directory: python
         run: |
           pip install tox
           tox -e py39
