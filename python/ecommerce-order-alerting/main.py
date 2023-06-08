@@ -42,7 +42,6 @@ def send_alert(records: RecordList) -> RecordList:
 class App:
     @staticmethod
     async def run(turbine: TurbineApp):
-
         try:
             # Postgres database being monitored for changes
             # by the Meroxa Platform

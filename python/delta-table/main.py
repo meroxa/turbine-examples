@@ -20,7 +20,6 @@ def format_and_enrich(records: RecordList) -> RecordList:
     data = {}
 
     for record in records:
-
         payload = record.value["payload"]
 
         geolocation = enrich.get_geo_location_from_postcode(payload["postcode"])
@@ -42,7 +41,6 @@ class App:
     @staticmethod
     async def run(turbine: TurbineApp):
         try:
-
             # secrets for writing to a S3 deltatable
             turbine.register_secrets("AWS_ACCESS_KEY_ID")
             turbine.register_secrets("AWS_SECRET_ACCESS_KEY")
