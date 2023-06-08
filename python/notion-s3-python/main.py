@@ -30,9 +30,9 @@ class App:
             # Source Notion Resource
             source = await turbine.resources("company-notion")
 
-            # Currently, we ignore the collection name passed in 
-            # for Notion resources. Your turbine app will pull all 
-            # pages and databases the Notion integration has access to. 
+            # Currently, we ignore the collection name passed in
+            # for Notion resources. Your turbine app will pull all
+            # pages and databases the Notion integration has access to.
             records = await source.records("*")
 
             # Our function which performs character counts
