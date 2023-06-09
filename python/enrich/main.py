@@ -28,7 +28,6 @@ def enrich_data(records: RecordList) -> RecordList:
 class App:
     @staticmethod
     async def run(turbine: TurbineApp):
-
         logging.basicConfig(level=logging.INFO)
 
         try:

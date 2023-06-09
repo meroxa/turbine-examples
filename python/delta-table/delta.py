@@ -17,7 +17,6 @@ S3_URI = os.getenv("AWS_URI")
 
 
 def write_records(data: dict):
-
     """
     An example of attempting to write to a delta table. This will attempt to
     initialize the table if it does not already exist

@@ -13,7 +13,7 @@ from constants import WEBHOOK_URL
 logging.basicConfig(level=logging.INFO)
 
 """
-Standarized function signature that takes a list of Records 
+Standardized function signature that takes a list of Records
 (database rows) and returns a list of Records with desired
 mutations
 """
@@ -42,7 +42,6 @@ def send_alert(records: RecordList) -> RecordList:
 class App:
     @staticmethod
     async def run(turbine: TurbineApp):
-
         try:
             # Postgres database being monitored for changes
             # by the Meroxa Platform

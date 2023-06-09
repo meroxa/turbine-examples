@@ -17,7 +17,6 @@ class GeoLocation:
 
 
 def get_geo_location_from_postcode(postcode: str) -> GeoLocation:
-
     params = {"address": postcode, "key": GOOGLE_KEY}
     response = requests.post(url=VALIDATION_API_URL, params=params)
 
