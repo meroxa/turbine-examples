@@ -7,7 +7,7 @@
     "algoliasearch": "^4.19.1"
   },
   "devDependencies": {
-    "prettier": "2.8.8",
+    "prettier": "3.0.0",
     "qunit": "^2.19.4"
   },
   "scripts": {
