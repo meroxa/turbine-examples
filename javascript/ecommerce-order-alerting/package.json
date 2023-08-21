@@ -6,7 +6,7 @@
     "@meroxa/turbine-js": "^2.0.1"
   },
   "devDependencies": {
-    "prettier": "2.8.8",
+    "prettier": "3.0.2",
     "qunit": "^2.19.4"
   },
   "license": "MIT",
