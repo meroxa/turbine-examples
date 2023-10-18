@@ -1,9 +1,9 @@
 package com.meroxa;
 
-import io.meroxa.turbine.Runner;
-import io.meroxa.turbine.Turbine;
-import io.meroxa.turbine.TurbineApp;
-import io.meroxa.turbine.TurbineRecord;
+import com.meroxa.turbine.Runner;
+import com.meroxa.turbine.Turbine;
+import com.meroxa.turbine.TurbineApp;
+import com.meroxa.turbine.TurbineRecord;
 
 import java.util.List;
 
