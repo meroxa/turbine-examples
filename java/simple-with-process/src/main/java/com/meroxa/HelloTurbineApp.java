@@ -14,7 +14,7 @@ public class HelloTurbineApp implements TurbineApp {
     @Override
     public void setup(Turbine turbine) {
         turbine
-            .fromSource("postgres", Map.of("foo", "bar"))
+            .fromSource("source_name", Map.of("foo", "bar"))
             .process(this::process)
             .toDestination("destination_name", Map.of("blah", "blah"));
     }
