@@ -1,4 +1,5 @@
 python/*/__pycache__
 javascript/*/node_modules
+java/*/target
 .idea/
 *.iml
