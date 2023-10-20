@@ -1,0 +1,8 @@
+{
+  "name": "simple-with-process",
+  "language": "java",
+  "environment": "common",
+  "fixtures": {
+    "source_name": "fixtures/demo-cdc.json"
+  }
+}
