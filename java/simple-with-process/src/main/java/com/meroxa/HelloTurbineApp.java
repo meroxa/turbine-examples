@@ -14,9 +14,9 @@ public class HelloTurbineApp implements TurbineApp {
     @Override
     public void setup(Turbine turbine) {
         turbine
-            .fromSource("kafka", Map.of("foo", "bar"))
+            .fromSource("kafka", Map.of("servers", "localhost:9092", "topic", "source-topic"))
             .process(this::process)
-            .toDestination("kafka", Map.of("blah", "blah"));
+            .toDestination("kafka", Map.of("servers", "localhost:9092", "topic", "source-topic"));
     }
 
     private List<TurbineRecord> process(List<TurbineRecord> records) {
@@ -24,7 +24,7 @@ public class HelloTurbineApp implements TurbineApp {
             .map(r -> {
                 var copy = r.copy();
                 String email = (String) copy.jsonGet("$.after.customer_email");
-                copy.jsonSet("$.after.customer_email", email.toLowerCase() + ".subdomain");
+                copy.jsonSet("$.after.customer_email", email.toLowerCase());
 
                 return copy;
             })
