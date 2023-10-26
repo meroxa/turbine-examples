@@ -14,17 +14,17 @@ public class HelloTurbineApp implements TurbineApp {
     @Override
     public void setup(Turbine turbine) {
         turbine
-            .fromSource("source_name", Map.of("foo", "bar"))
+            .fromSource("kafka", Map.of("foo", "bar"))
             .process(this::process)
-            .toDestination("destination_name", Map.of("blah", "blah"));
+            .toDestination("kafka", Map.of("blah", "blah"));
     }
 
     private List<TurbineRecord> process(List<TurbineRecord> records) {
         return records.stream()
-            .filter(r -> r.jsonGet("$.payload.after.id").equals(9582724))
             .map(r -> {
                 var copy = r.copy();
-                copy.setPayload("customer emails is" + copy.jsonGet("$.payload.after.customer_email"));
+                String email = (String) copy.jsonGet("$.after.customer_email");
+                copy.jsonSet("$.after.customer_email", email.toLowerCase() + ".subdomain");
 
                 return copy;
             })
