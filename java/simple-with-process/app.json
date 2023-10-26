@@ -3,6 +3,6 @@
   "language": "java",
   "environment": "common",
   "fixtures": {
-    "source_name": "fixtures/demo-cdc.json"
+    "kafka": "fixtures/demo-cdc.json"
   }
 }
