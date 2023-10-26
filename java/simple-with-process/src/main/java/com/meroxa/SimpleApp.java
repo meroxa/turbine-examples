@@ -9,7 +9,7 @@ import com.meroxa.turbine.TurbineRecord;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class HelloTurbineApp implements TurbineApp {
+public class SimpleApp implements TurbineApp {
 
     @Override
     public void setup(Turbine turbine) {
