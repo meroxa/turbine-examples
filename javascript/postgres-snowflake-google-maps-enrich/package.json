@@ -9,7 +9,7 @@
     "util": "^0.12.5"
   },
   "devDependencies": {
-    "prettier": "2.8.8",
+    "prettier": "3.2.2",
     "qunit": "^2.20.0"
   },
   "scripts": {
