@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "prettier": "2.8.8",
-    "qunit": "^2.20.0"
+    "qunit": "^2.20.1"
   },
   "scripts": {
     "prettier:check": "prettier --check './**/*.{js,ts,json}'",
