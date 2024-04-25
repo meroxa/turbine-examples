@@ -38,7 +38,7 @@ jobs:
           go-version: ^1.20
       - uses: actions/checkout@v3
       - name: golangci-lint for enrich
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v5
         with:
           args: --timeout 4m0s
           working-directory: go/enrich
@@ -47,17 +47,17 @@ jobs:
         run: |
           go mod download
       - name: golangci-lint for flatten
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v5
         with:
           args: --timeout 4m0s
           working-directory: go/flatten
       - name: golangci-lint for kafka-pg-demo
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v5
         with:
           args: --timeout 4m0s
           working-directory: go/kafka-pg-demo
       - name: golangci-lint for simple
-        uses: golangci/golangci-lint-action@v3
+        uses: golangci/golangci-lint-action@v5
         with:
           args: --timeout 4m0s
           working-directory: go/simple
