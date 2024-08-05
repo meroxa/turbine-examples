@@ -8,7 +8,7 @@ pandas==2.2.2
 requests==2.32.3
 
 # Sentry.io Monitoring 
-sentry-sdk==1.45.0
+sentry-sdk==2.12.0
 
 # Test Data generation
 psycopg==3.2.1
